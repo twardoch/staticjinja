@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding:utf-8 -*-
 
 """staticjinja
 
@@ -16,11 +15,13 @@ Options:
   --version     Show version.
 
 """
-from __future__ import print_function
-from docopt import docopt
+
 import os
-import staticjinja
 import sys
+
+from docopt import docopt
+
+import staticjinja
 
 
 def render(args):
@@ -42,27 +43,27 @@ def render(args):
             }
     """
     srcpath = (
-        os.path.join(os.getcwd(), 'templates') if args['--srcpath'] is None
-        else args['--srcpath'] if os.path.isabs(args['--srcpath'])
-        else os.path.join(os.getcwd(), args['--srcpath'])
+        os.path.join(os.getcwd(), "templates")
+        if args["--srcpath"] is None
+        else args["--srcpath"]
+        if os.path.isabs(args["--srcpath"])
+        else os.path.join(os.getcwd(), args["--srcpath"])
     )
 
     if not os.path.isdir(srcpath):
-        print("The templates directory '%s' is invalid."
-              % srcpath)
+        print("The templates directory '%s' is invalid." % srcpath)
         sys.exit(1)
 
-    if args['--outpath'] is not None:
-        outpath = args['--outpath']
+    if args["--outpath"] is not None:
+        outpath = args["--outpath"]
     else:
         outpath = os.getcwd()
 
     if not os.path.isdir(outpath):
-        print("The output directory '%s' is invalid."
-              % outpath)
+        print("The output directory '%s' is invalid." % outpath)
         sys.exit(1)
 
-    staticdirs = args['--static']
+    staticdirs = args["--static"]
     staticpaths = None
 
     if staticdirs:
@@ -73,23 +74,20 @@ def render(args):
                 print("The static files directory '%s' is invalid." % path)
                 sys.exit(1)
 
-    srcmask = args.get('--srcmask', None)
+    srcmask = args.get("--srcmask", None)
 
     site = staticjinja.make_site(
-        searchpath=srcpath,
-        outpath=outpath,
-        staticpaths=staticpaths,
-        searchmask=srcmask
+        searchpath=srcpath, outpath=outpath, staticpaths=staticpaths, searchmask=srcmask
     )
 
-    use_reloader = args['watch']
+    use_reloader = args["watch"]
 
     site.render(use_reloader=use_reloader)
 
 
 def main():
-    render(docopt(__doc__, version='staticjinja 0.3.0'))
+    render(docopt(__doc__, version="staticjinja 0.3.0"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

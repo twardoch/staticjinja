@@ -1,7 +1,7 @@
 from setuptools import setup
 
-__version_info__ = ('0', '3', '5')
-__version__ = '.'.join(__version_info__)
+__version_info__ = ("0", "3", "5")
+__version__ = ".".join(__version_info__)
 
 setup(
     name="staticjinja",
@@ -13,8 +13,8 @@ setup(
     keywords=["jinja", "static", "website"],
     packages=["staticjinja"],
     entry_points={
-        'console_scripts': [
-            'staticjinja = staticjinja.cli:main',
+        "console_scripts": [
+            "staticjinja = staticjinja.cli:main",
         ],
     },
     install_requires=[
@@ -35,5 +35,5 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Development Status :: 4 - Beta",
-    ]
+    ],
 )

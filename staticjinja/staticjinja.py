@@ -1,12 +1,8 @@
-# -*- coding:utf-8 -*-
-
 """
 Simple static page generator.
 
 Uses Jinja2 to compile templates.
 """
-
-from __future__ import absolute_import, print_function
 
 import inspect
 import logging
@@ -15,6 +11,7 @@ import re
 import shutil
 import warnings
 from fnmatch import fnmatch
+
 from jinja2 import Environment, FileSystemLoader
 
 from .reloader import Reloader
@@ -26,7 +23,7 @@ def _has_argument(func):
     :param func:
         The function to be tested for existence of an argument.
     """
-    if hasattr(inspect, 'signature'):
+    if hasattr(inspect, "signature"):
         # New way in python 3.3
         sig = inspect.signature(func)
         return bool(sig.parameters)
@@ -35,7 +32,7 @@ def _has_argument(func):
         return bool(inspect.getargspec(func).args)
 
 
-class Site(object):
+class Site:
     """The Site object.
 
     :param environment:
@@ -82,18 +79,19 @@ class Site(object):
 
     """
 
-    def __init__(self,
-                 environment,
-                 searchpath,
-                 outpath,
-                 encoding,
-                 logger,
-                 contexts=None,
-                 rules=None,
-                 staticpaths=None,
-                 mergecontexts=False,
-                 searchmask=None,
-                 ):
+    def __init__(
+        self,
+        environment,
+        searchpath,
+        outpath,
+        encoding,
+        logger,
+        contexts=None,
+        rules=None,
+        staticpaths=None,
+        mergecontexts=False,
+        searchmask=None,
+    ):
         self._env = environment
         self.searchpath = searchpath
         self.outpath = outpath
@@ -108,21 +106,22 @@ class Site(object):
         self.searchmask = searchmask
 
     @classmethod
-    def make_site(cls,
-                  searchpath="templates",
-                  outpath=".",
-                  contexts=None,
-                  rules=None,
-                  encoding="utf8",
-                  followlinks=True,
-                  extensions=None,
-                  staticpaths=None,
-                  filters=None,
-                  env_globals=None,
-                  env_kwargs=None,
-                  mergecontexts=False,
-                  searchmask=None,
-                  ):
+    def make_site(
+        cls,
+        searchpath="templates",
+        outpath=".",
+        contexts=None,
+        rules=None,
+        encoding="utf8",
+        followlinks=True,
+        extensions=None,
+        staticpaths=None,
+        filters=None,
+        env_globals=None,
+        env_kwargs=None,
+        mergecontexts=False,
+        searchmask=None,
+    ):
         """Create a :class:`Site <Site>` object.
 
         :param searchpath:
@@ -192,16 +191,15 @@ class Site(object):
             # TODO: Determine if there is a better way to write do this
             calling_module = inspect.getmodule(inspect.stack()[-1][0])
             # Absolute path to project
-            project_path = os.path.realpath(os.path.dirname(
-                calling_module.__file__))
+            project_path = os.path.realpath(os.path.dirname(calling_module.__file__))
             searchpath = os.path.join(project_path, searchpath)
 
         if env_kwargs is None:
             env_kwargs = {}
-        env_kwargs['loader'] = FileSystemLoader(searchpath=searchpath,
-                                                encoding=encoding,
-                                                followlinks=followlinks)
-        env_kwargs.setdefault('extensions', extensions or [])
+        env_kwargs["loader"] = FileSystemLoader(
+            searchpath=searchpath, encoding=encoding, followlinks=followlinks
+        )
+        env_kwargs.setdefault("extensions", extensions or [])
         environment = Environment(**env_kwargs)
         if filters:
             environment.filters.update(filters)
@@ -212,17 +210,18 @@ class Site(object):
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.INFO)
         logger.addHandler(logging.StreamHandler())
-        return cls(environment,
-                   searchpath=searchpath,
-                   outpath=outpath,
-                   encoding=encoding,
-                   logger=logger,
-                   rules=rules,
-                   contexts=contexts,
-                   staticpaths=staticpaths,
-                   mergecontexts=mergecontexts,
-                   searchmask=searchmask,
-                   )
+        return cls(
+            environment,
+            searchpath=searchpath,
+            outpath=outpath,
+            encoding=encoding,
+            logger=logger,
+            rules=rules,
+            contexts=contexts,
+            staticpaths=staticpaths,
+            mergecontexts=mergecontexts,
+            searchmask=searchmask,
+        )
 
     @property
     def template_names(self):
@@ -319,7 +318,7 @@ class Site(object):
 
         :param filename: the name of the file to check
         """
-        return any((x.startswith("_") for x in filename.split(os.path.sep)))
+        return any(x.startswith("_") for x in filename.split(os.path.sep))
 
     def is_ignored(self, filename):
         """Check if a file is an ignored file.
@@ -331,7 +330,7 @@ class Site(object):
 
         :param filename: the name of the file to check
         """
-        return any((x.startswith(".") for x in filename.split(os.path.sep)))
+        return any(x.startswith(".") for x in filename.split(os.path.sep))
 
     def is_template(self, filename):
         """Check if a file is a template.
@@ -417,7 +416,7 @@ class Site(object):
         for f in files:
             input_location = os.path.join(self.searchpath, f)
             output_location = os.path.join(self.outpath, f)
-            print("Copying %s to %s." % (f, output_location))
+            print(f"Copying {f} to {output_location}.")
             self._ensure_dir(f)
             shutil.copy2(input_location, output_location)
 
@@ -444,14 +443,14 @@ class Site(object):
         self.copy_static(self.static_names)
 
         if use_reloader:
-            self.logger.info("Watching '%s' for changes..." %
-                             self.searchpath)
+            self.logger.info("Watching '%s' for changes..." % self.searchpath)
             self.logger.info("Press Ctrl+C to stop.")
             Reloader(self).watch()
 
     def __repr__(self):
-        return "%s('%s', '%s')" % (type(self).__name__,
-                                   self.searchpath, self.outpath)
+        return "{}('{}', '{}')".format(
+            type(self).__name__, self.searchpath, self.outpath
+        )
 
 
 class Renderer(Site):
@@ -463,35 +462,37 @@ class Renderer(Site):
         return self.render(use_reloader)
 
 
-def make_site(searchpath="templates",
-              outpath=".",
-              contexts=None,
-              rules=None,
-              encoding="utf8",
-              followlinks=True,
-              extensions=None,
-              staticpaths=None,
-              filters=None,
-              env_globals=None,
-              env_kwargs=None,
-              mergecontexts=False,
-              searchmask=None,
-              ):
+def make_site(
+    searchpath="templates",
+    outpath=".",
+    contexts=None,
+    rules=None,
+    encoding="utf8",
+    followlinks=True,
+    extensions=None,
+    staticpaths=None,
+    filters=None,
+    env_globals=None,
+    env_kwargs=None,
+    mergecontexts=False,
+    searchmask=None,
+):
     warnings.warn("make_site was renamed to Site.make_site.")
-    return Site.make_site(searchpath=searchpath,
-                          outpath=outpath,
-                          contexts=contexts,
-                          rules=rules,
-                          encoding=encoding,
-                          followlinks=followlinks,
-                          extensions=extensions,
-                          staticpaths=staticpaths,
-                          filters=filters,
-                          env_globals=env_globals,
-                          env_kwargs=env_kwargs,
-                          mergecontexts=mergecontexts,
-                          searchmask=searchmask,
-                          )
+    return Site.make_site(
+        searchpath=searchpath,
+        outpath=outpath,
+        contexts=contexts,
+        rules=rules,
+        encoding=encoding,
+        followlinks=followlinks,
+        extensions=extensions,
+        staticpaths=staticpaths,
+        filters=filters,
+        env_globals=env_globals,
+        env_kwargs=env_kwargs,
+        mergecontexts=mergecontexts,
+        searchmask=searchmask,
+    )
 
 
 def make_renderer(*args, **kwargs):
