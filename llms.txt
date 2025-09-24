@@ -1,0 +1,1875 @@
+Project Structure:
+📁 staticjinja
+├── 📁 docs
+│   ├── 📁 dev
+│   │   ├── 📄 authors.rst
+│   │   ├── 📄 changelog.rst
+│   │   └── 📄 todo.rst
+│   ├── 📁 user
+│   │   ├── 📄 advanced.rst
+│   │   └── 📄 quickstart.rst
+│   ├── 📄 api.rst
+│   ├── 📄 conf.py
+│   ├── 📄 index.rst
+│   ├── 📄 make.bat
+│   └── 📄 Makefile
+├── 📁 example
+│   ├── 📁 templates
+│   │   ├── 📁 posts
+│   │   │   └── 📄 foo.html
+│   │   ├── 📄 _base.html
+│   │   └── 📄 index.html
+│   └── 📄 build.py
+├── 📁 staticjinja
+│   ├── 📄 __init__.py
+│   ├── 📄 __main__.py
+│   ├── 📄 cli.py
+│   ├── 📄 reloader.py
+│   └── 📄 staticjinja.py
+├── 📁 staticjinja.egg-info
+├── 📄 .gitignore
+├── 📄 AUTHORS.rst
+├── 📄 CHANGELOG.rst
+├── 📄 CONTRIBUTING.md
+├── 📄 LICENSE
+├── 📄 Makefile
+├── 📄 MANIFEST.in
+├── 📄 README.rst
+├── 📄 requirements.txt
+├── 📄 setup.cfg
+├── 📄 setup.py
+├── 📄 test_staticjinja.py
+└── 📄 tox.ini
+
+
+<documents>
+<document index="1">
+<source>.gitignore</source>
+<document_content>
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+### Python Patch ###
+.venv/
+
+
+*.py[co]
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+
+#Translations
+*.mo
+
+#Mr Developer
+.mr.developer.cfg
+
+# Compiled html
+/*.html
+
+docs/_build
+
+# Automatically created by GitHub for Mac
+# To make edits, delete these initial comments, or else your changes may be lost!
+
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+.idea
+# CMake
+cmake-build-*/
+
+
+# File-based project format
+*.iws
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+
+</document_content>
+</document>
+
+<document index="2">
+<source>.travis.yml</source>
+<document_content>
+language: python
+python: 2.7
+env:
+  - TOX_ENV=py27
+  - TOX_ENV=py34
+  - TOX_ENV=docs
+  - TOX_ENV=flake8
+install:
+  - pip install tox
+script:
+  - tox -e $TOX_ENV
+
+</document_content>
+</document>
+
+<document index="3">
+<source>AUTHORS.rst</source>
+<document_content>
+staticjinja is written and maintained by Ceasar Bautista and
+various contributors:
+
+Development Lead
+````````````````
+
+- Ceasar Bautista <cbautista2010@gmail.com>
+
+
+Patches and Suggestions
+```````````````````````
+
+- Dominic Rodger (dominicrodger)
+- Filippo Valsorda
+- Alexey (rudyrk)
+- Jacob Lyles
+- Jakub Zalewski
+- NeuronQ
+- Eduardo Rivas (jerivas)
+- Bryan Bennett (bbenne10)
+- Anuraag Agrawal (anuraaga)
+- saschalalala
+- Tim Best (timbest)
+
+</document_content>
+</document>
+
+<document index="4">
+<source>CHANGELOG.rst</source>
+<document_content>
+
+0.3.3
+-----
+
+* Enable users to direct pass dictionaries instead of context generator in Site
+  and make_site() for contexts that don't require any logic.
+
+* Introduces a ``mergecontexts`` parameter to Site and make_site() to direct
+  staticjinja to either use all matching context generator or only the first
+  one when rendering templates.
+
+0.3.2
+-----
+
+* Allow passing keyword arguments to jinja2 Environment.
+
+* Use ``shutil.copy2`` instead of ``shutil.copyfile`` when copying static
+  resources to preserve the modified time of files which haven't been modified.
+
+* Make the Reloader handle "created" events to support editors like Pycharm
+  which save by first deleting then creating, rather than modifying.
+
+* Update easywatch dependency to 0.0.3 to fix an issue that occurs when
+  installing easywatch 0.0.2.
+
+* Make ``--srcpath`` accept both absolute paths and relative paths.
+
+* Allow directories to be marked partial or ignored, so that all files inside
+  them can be considered partial or ignored. Without this, developers would need
+  to rename the contents of these directories manually.
+
+* Allow users to mark a single file as static, instead of just directories.
+
+0.3.1
+-----
+
+* Add support for filters so that users can define their own Jinja2 filters and
+  use them in templates::
+
+    filters = {
+        'filter1': lambda x: "hello world!",
+        'filter2': lambda x: x.lower()
+    }
+    site = staticjinja.make_site(filters=filters)
+
+* Add support for multiple static directories. They can be passed as a string
+  of comma-separated names to the CLI or as a list to the Renderer.
+
+* "Renderer" was renamed to "Site" and the Reloader was moved
+  staticjinja.reloader.
+
+0.3.0
+-----
+
+* Add a command, ``staticjinja``, to handle the simple case of
+  building context-less templates.
+* Add support for copying static files from the template directory to
+  the output directory.
+* Add support for testing, linting and checking the documentation
+  using ``tox``.
+
+0.2.0
+-----
+
+* Add a ``Reloader`` class.
+
+* Add ``Renderer.templates``, which refers to the lists of templates available
+  to the ``Renderer``.
+
+* Make ``Renderer.get_context_generator()`` private.
+
+* Add ``Renderer.get_dependencies(filename)``, which gets every file that
+  depends on the given file.
+
+* Make ``Renderer.render_templates()`` require a list of templates to render,
+  *templates*.
+
+</document_content>
+</document>
+
+<document index="5">
+<source>CONTRIBUTING.md</source>
+<document_content>
+This project is very small, and there's lot of room for
+improvement. If you'd like to contribute, here's a quick guide:
+
+1. Make an issue describing what you wish to fix.
+2. Fork the repo.
+3. Make your changes, and test them with `tox`.
+4. Push to your fork and submit a pull request.
+
+## Testing your changes with tox
+
+You can test your changes with tox
+(http://tox.readthedocs.org/en/latest/), which you can install with:
+
+    $ pip install tox
+
+You can run tests on all supported Python versions, check the code
+conforms to PEP 8, and check that the documentation builds
+successfully by just running:
+
+    $ tox
+
+Once you're happy, push code to your fork, and submit a pull request.
+
+## Getting your pull request accepted
+
+At this point you're waiting on me. I like to at least comment on, if
+not accept, pull requests within three business days (and, typically,
+one business day). I may suggest some changes or improvements or
+alternatives.
+
+Some things that will increase the chance that your pull request is
+accepted:
+
+- If relevant, include tests that fail without your code and pass
+  with it.
+- Update all documentation that would be affected by your
+  contribution.
+- Make sure your code passes all the checks that `tox` runs.
+- Ideally, make sure your commit messages are in the proper format.
+
+```
+
+(#99999) Make the example in CONTRIBUTING imperative and concrete
+
+Without this patch applied the example commit message in the CONTRIBUTING
+document is not a concrete example.  This is a problem because the
+contributor is left to imagine what the commit message should look like
+based on a description rather than an example.  This patch fixes the
+problem by making the example concrete and imperative.
+
+The first line is a real life imperative statement with a ticket number
+from our issue tracker.  The body describes the behavior without the patch,
+why this is a problem, and how the patch fixes the problem when applied.
+
+```
+
+</document_content>
+</document>
+
+<document index="6">
+<source>LICENSE</source>
+<document_content>
+Copyright (c) 2014 Ceasar Bautista
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+</document_content>
+</document>
+
+<document index="7">
+<source>MANIFEST.in</source>
+<document_content>
+include LICENSE
+
+</document_content>
+</document>
+
+<document index="8">
+<source>Makefile</source>
+<document_content>
+.PHONY: docs
+
+init:
+	pip install -r requirements.txt
+
+test:
+	py.test test_staticjinja.py
+
+coverage:
+	py.test --verbose --cov-report term-missing --cov=staticjinja test_staticjinja.py
+
+publish:
+	python setup.py sdist upload
+	python setup.py bdist_wheel upload
+
+docs:
+	cd docs && make html
+	@echo "\033[95m\n\nBuild successful! View the docs homepage at docs/_build/html/index.html.\n\033[0m"
+
+</document_content>
+</document>
+
+<document index="9">
+<source>README.rst</source>
+<document_content>
+staticjinja
+===========
+
+.. image:: https://badge.fury.io/py/staticjinja.png
+    :target: http://badge.fury.io/py/staticjinja
+
+.. image:: https://travis-ci.org/Ceasar/staticjinja.svg
+    :target: https://travis-ci.org/Ceasar/staticjinja
+
+**staticjinja** is a library that makes it easy to build static sites using
+Jinja2_.
+
+Many static site generators are complex, with long manuals and unnecessary
+features. But using template engines to build static websites is really useful.
+
+staticjinja is designed to be lightweight (under 500 lines of source code),
+and to be easy to use, learn, and extend, enabling you to focus on making your
+site.
+
+.. code-block:: bash
+
+    $ mkdir templates
+    $ vim templates/index.html
+    $ staticjinja watch
+    Building index.html...
+    Templates built.
+    Watching 'templates' for changes...
+    Press Ctrl+C to stop.
+
+
+Installation
+------------
+
+To install staticjinja, simply:
+
+.. code-block:: bash
+
+    $ pip install staticjinja
+
+Documentation
+-------------
+
+Documentation is available at
+http://staticjinja.readthedocs.org/en/latest/.
+
+Contribute
+----------
+
+#. Check for open issues or open a fresh issue to start a discussion
+   around a feature idea or a bug.
+#. Fork `the repository`_ on GitHub to start making your changes to
+   the **master** branch (or branch off of it).
+#. Send a pull request and bug the maintainer until it gets merged and
+   published. :) Make sure to add yourself to AUTHORS_.
+
+.. _`the repository`: https://github.com/Ceasar/staticjinja
+.. _AUTHORS: https://github.com/Ceasar/staticjinja/blob/master/AUTHORS.rst
+.. _Jinja2: http://jinja.pocoo.org/
+
+</document_content>
+</document>
+
+<document index="10">
+<source>docs/Makefile</source>
+<document_content>
+# Makefile for Sphinx documentation
+#
+
+# You can set these variables from the command line.
+SPHINXOPTS    =
+SPHINXBUILD   = sphinx-build
+PAPER         =
+BUILDDIR      = _build
+
+# Internal variables.
+PAPEROPT_a4     = -D latex_paper_size=a4
+PAPEROPT_letter = -D latex_paper_size=letter
+ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
+# the i18n builder cannot share the environment and doctrees with the others
+I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
+
+.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest gettext
+
+help:
+	@echo "Please use \`make <target>' where <target> is one of"
+	@echo "  html       to make standalone HTML files"
+	@echo "  dirhtml    to make HTML files named index.html in directories"
+	@echo "  singlehtml to make a single large HTML file"
+	@echo "  pickle     to make pickle files"
+	@echo "  json       to make JSON files"
+	@echo "  htmlhelp   to make HTML files and a HTML help project"
+	@echo "  qthelp     to make HTML files and a qthelp project"
+	@echo "  devhelp    to make HTML files and a Devhelp project"
+	@echo "  epub       to make an epub"
+	@echo "  latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter"
+	@echo "  latexpdf   to make LaTeX files and run them through pdflatex"
+	@echo "  text       to make text files"
+	@echo "  man        to make manual pages"
+	@echo "  texinfo    to make Texinfo files"
+	@echo "  info       to make Texinfo files and run them through makeinfo"
+	@echo "  gettext    to make PO message catalogs"
+	@echo "  changes    to make an overview of all changed/added/deprecated items"
+	@echo "  linkcheck  to check all external links for integrity"
+	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
+
+clean:
+	-rm -rf $(BUILDDIR)/*
+
+html:
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+
+dirhtml:
+	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/dirhtml."
+
+singlehtml:
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(BUILDDIR)/singlehtml
+	@echo
+	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
+
+pickle:
+	$(SPHINXBUILD) -b pickle $(ALLSPHINXOPTS) $(BUILDDIR)/pickle
+	@echo
+	@echo "Build finished; now you can process the pickle files."
+
+json:
+	$(SPHINXBUILD) -b json $(ALLSPHINXOPTS) $(BUILDDIR)/json
+	@echo
+	@echo "Build finished; now you can process the JSON files."
+
+htmlhelp:
+	$(SPHINXBUILD) -b htmlhelp $(ALLSPHINXOPTS) $(BUILDDIR)/htmlhelp
+	@echo
+	@echo "Build finished; now you can run HTML Help Workshop with the" \
+	      ".hhp project file in $(BUILDDIR)/htmlhelp."
+
+qthelp:
+	$(SPHINXBUILD) -b qthelp $(ALLSPHINXOPTS) $(BUILDDIR)/qthelp
+	@echo
+	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
+	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/staticjinja.qhcp"
+	@echo "To view the help file:"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/staticjinja.qhc"
+
+devhelp:
+	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
+	@echo
+	@echo "Build finished."
+	@echo "To view the help file:"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/staticjinja"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/staticjinja"
+	@echo "# devhelp"
+
+epub:
+	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
+	@echo
+	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
+
+latex:
+	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
+	@echo
+	@echo "Build finished; the LaTeX files are in $(BUILDDIR)/latex."
+	@echo "Run \`make' in that directory to run these through (pdf)latex" \
+	      "(use \`make latexpdf' here to do that automatically)."
+
+latexpdf:
+	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
+	@echo "Running LaTeX files through pdflatex..."
+	$(MAKE) -C $(BUILDDIR)/latex all-pdf
+	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex."
+
+text:
+	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(BUILDDIR)/text
+	@echo
+	@echo "Build finished. The text files are in $(BUILDDIR)/text."
+
+man:
+	$(SPHINXBUILD) -b man $(ALLSPHINXOPTS) $(BUILDDIR)/man
+	@echo
+	@echo "Build finished. The manual pages are in $(BUILDDIR)/man."
+
+texinfo:
+	$(SPHINXBUILD) -b texinfo $(ALLSPHINXOPTS) $(BUILDDIR)/texinfo
+	@echo
+	@echo "Build finished. The Texinfo files are in $(BUILDDIR)/texinfo."
+	@echo "Run \`make' in that directory to run these through makeinfo" \
+	      "(use \`make info' here to do that automatically)."
+
+info:
+	$(SPHINXBUILD) -b texinfo $(ALLSPHINXOPTS) $(BUILDDIR)/texinfo
+	@echo "Running Texinfo files through makeinfo..."
+	make -C $(BUILDDIR)/texinfo info
+	@echo "makeinfo finished; the Info files are in $(BUILDDIR)/texinfo."
+
+gettext:
+	$(SPHINXBUILD) -b gettext $(I18NSPHINXOPTS) $(BUILDDIR)/locale
+	@echo
+	@echo "Build finished. The message catalogs are in $(BUILDDIR)/locale."
+
+changes:
+	$(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) $(BUILDDIR)/changes
+	@echo
+	@echo "The overview file is in $(BUILDDIR)/changes."
+
+linkcheck:
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(BUILDDIR)/linkcheck
+	@echo
+	@echo "Link check complete; look for any errors in the above output " \
+	      "or in $(BUILDDIR)/linkcheck/output.txt."
+
+doctest:
+	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(BUILDDIR)/doctest
+	@echo "Testing of doctests in the sources finished, look at the " \
+	      "results in $(BUILDDIR)/doctest/output.txt."
+
+</document_content>
+</document>
+
+<document index="11">
+<source>docs/api.rst</source>
+<document_content>
+.. _api:
+
+Developer Interface
+===================
+
+.. module:: staticjinja
+
+This part of the documentation covers staticjinja's API.
+
+Main Interface
+--------------
+
+All of staticjinja's functionality can be accessed by this function,
+which returns an instance of the :class:`Site <Site>` object.
+
+.. autofunction:: make_site
+
+Classes
+~~~~~~~
+
+.. autoclass:: staticjinja.Site
+   :inherited-members:
+
+.. autoclass:: staticjinja.Reloader
+   :inherited-members:
+
+</document_content>
+</document>
+
+# File: /Users/adam/Developer/vcs/github.twardoch/pub/staticjinja/docs/conf.py
+# Language: python
+
+import os
+import sys
+import sphinx_rtd_theme
+
+
+<document index="12">
+<source>docs/dev/authors.rst</source>
+<document_content>
+Authors
+=======
+
+.. include:: ../../AUTHORS.rst
+
+</document_content>
+</document>
+
+<document index="13">
+<source>docs/dev/changelog.rst</source>
+<document_content>
+Changelog
+=========
+
+.. include:: ../../CHANGELOG.rst
+
+</document_content>
+</document>
+
+<document index="14">
+<source>docs/dev/todo.rst</source>
+<document_content>
+Contributing
+============
+
+staticjinja is under active development, and contributions are more
+than welcome!
+
+Get the Code
+------------
+
+staticjinja is actively developed on GitHub, where the code is `always
+available <https://github.com/Ceasar/staticjinja>`_.
+
+You can clone the public repository::
+
+    git clone git://github.com/Ceasar/staticjinja.git
+
+Once you have a copy of the source, you can embed it in your Python
+package, or install it into your site-packages easily::
+
+    $ python setup.py install
+
+How to Help
+-----------
+
+#. Check for open issues or open a fresh issue to start a discussion
+   around a feature idea or a bug.
+#. Fork `the repository`_ on GitHub to start making your changes to
+   the **master** branch (or branch off of it).
+#. Send a pull request and bug the maintainer until it gets merged and
+   published. :) Make sure to add yourself to AUTHORS_.
+
+.. _`the repository`: https://github.com/Ceasar/staticjinja
+.. _AUTHORS: https://github.com/Ceasar/staticjinja/blob/master/AUTHORS.rst
+
+</document_content>
+</document>
+
+<document index="15">
+<source>docs/index.rst</source>
+<document_content>
+staticjinja
+===========
+
+staticjinja is a library for easily deploying static sites using the
+Jinja2_ template engine. 
+
+Most static site generators are cumbersome to use. Nevertheless, when
+deploying a static website that could benefit from factored out data
+or modular HTML pages (especially convenient when prototyping), a
+templating engine can be invaluable. Jinja2 is an extremely powerful
+tool in this regard.
+
+staticjinja is designed to be lightweight, easy-to-use, and highly
+extensible, enabling you to focus on simply making your site.
+
+.. code-block:: bash
+
+    $ mkdir templates
+    $ vim templates/index.html
+    $ staticjinja watch
+    Building index.html...
+    Templates built.
+    Watching 'templates' for changes...
+    Press Ctrl+C to stop.
+
+
+User Guide
+----------
+
+This part of the documentation focuses on step-by-step instructions
+for getting the most of staticjinja.
+
+.. toctree::
+   :maxdepth: 2
+
+   user/quickstart
+   user/advanced
+
+API Documentation
+-----------------
+
+If you are looking for information on a specific function, class, or
+method, this part of the documentation is for you.
+
+.. toctree::
+   :maxdepth: 2
+
+   api
+
+Contributor Guide
+------------------
+
+If you want to contribute to the project, this part of the
+documentation is for you.
+
+.. toctree::
+   :maxdepth: 1
+
+   dev/todo
+   dev/authors
+   dev/changelog
+
+.. _Jinja2: http://jinja.pocoo.org/
+
+</document_content>
+</document>
+
+<document index="16">
+<source>docs/make.bat</source>
+<document_content>
+@ECHO OFF
+
+REM Command file for Sphinx documentation
+
+if "%SPHINXBUILD%" == "" (
+	set SPHINXBUILD=sphinx-build
+)
+set BUILDDIR=_build
+set ALLSPHINXOPTS=-d %BUILDDIR%/doctrees %SPHINXOPTS% .
+set I18NSPHINXOPTS=%SPHINXOPTS% .
+if NOT "%PAPER%" == "" (
+	set ALLSPHINXOPTS=-D latex_paper_size=%PAPER% %ALLSPHINXOPTS%
+	set I18NSPHINXOPTS=-D latex_paper_size=%PAPER% %I18NSPHINXOPTS%
+)
+
+if "%1" == "" goto help
+
+if "%1" == "help" (
+	:help
+	echo.Please use `make ^<target^>` where ^<target^> is one of
+	echo.  html       to make standalone HTML files
+	echo.  dirhtml    to make HTML files named index.html in directories
+	echo.  singlehtml to make a single large HTML file
+	echo.  pickle     to make pickle files
+	echo.  json       to make JSON files
+	echo.  htmlhelp   to make HTML files and a HTML help project
+	echo.  qthelp     to make HTML files and a qthelp project
+	echo.  devhelp    to make HTML files and a Devhelp project
+	echo.  epub       to make an epub
+	echo.  latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter
+	echo.  text       to make text files
+	echo.  man        to make manual pages
+	echo.  texinfo    to make Texinfo files
+	echo.  gettext    to make PO message catalogs
+	echo.  changes    to make an overview over all changed/added/deprecated items
+	echo.  linkcheck  to check all external links for integrity
+	echo.  doctest    to run all doctests embedded in the documentation if enabled
+	goto end
+)
+
+if "%1" == "clean" (
+	for /d %%i in (%BUILDDIR%\*) do rmdir /q /s %%i
+	del /q /s %BUILDDIR%\*
+	goto end
+)
+
+if "%1" == "html" (
+	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The HTML pages are in %BUILDDIR%/html.
+	goto end
+)
+
+if "%1" == "dirhtml" (
+	%SPHINXBUILD% -b dirhtml %ALLSPHINXOPTS% %BUILDDIR%/dirhtml
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The HTML pages are in %BUILDDIR%/dirhtml.
+	goto end
+)
+
+if "%1" == "singlehtml" (
+	%SPHINXBUILD% -b singlehtml %ALLSPHINXOPTS% %BUILDDIR%/singlehtml
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The HTML pages are in %BUILDDIR%/singlehtml.
+	goto end
+)
+
+if "%1" == "pickle" (
+	%SPHINXBUILD% -b pickle %ALLSPHINXOPTS% %BUILDDIR%/pickle
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished; now you can process the pickle files.
+	goto end
+)
+
+if "%1" == "json" (
+	%SPHINXBUILD% -b json %ALLSPHINXOPTS% %BUILDDIR%/json
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished; now you can process the JSON files.
+	goto end
+)
+
+if "%1" == "htmlhelp" (
+	%SPHINXBUILD% -b htmlhelp %ALLSPHINXOPTS% %BUILDDIR%/htmlhelp
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished; now you can run HTML Help Workshop with the ^
+.hhp project file in %BUILDDIR%/htmlhelp.
+	goto end
+)
+
+if "%1" == "qthelp" (
+	%SPHINXBUILD% -b qthelp %ALLSPHINXOPTS% %BUILDDIR%/qthelp
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished; now you can run "qcollectiongenerator" with the ^
+.qhcp project file in %BUILDDIR%/qthelp, like this:
+	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\staticjinja.qhcp
+	echo.To view the help file:
+	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\staticjinja.ghc
+	goto end
+)
+
+if "%1" == "devhelp" (
+	%SPHINXBUILD% -b devhelp %ALLSPHINXOPTS% %BUILDDIR%/devhelp
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished.
+	goto end
+)
+
+if "%1" == "epub" (
+	%SPHINXBUILD% -b epub %ALLSPHINXOPTS% %BUILDDIR%/epub
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The epub file is in %BUILDDIR%/epub.
+	goto end
+)
+
+if "%1" == "latex" (
+	%SPHINXBUILD% -b latex %ALLSPHINXOPTS% %BUILDDIR%/latex
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished; the LaTeX files are in %BUILDDIR%/latex.
+	goto end
+)
+
+if "%1" == "text" (
+	%SPHINXBUILD% -b text %ALLSPHINXOPTS% %BUILDDIR%/text
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The text files are in %BUILDDIR%/text.
+	goto end
+)
+
+if "%1" == "man" (
+	%SPHINXBUILD% -b man %ALLSPHINXOPTS% %BUILDDIR%/man
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The manual pages are in %BUILDDIR%/man.
+	goto end
+)
+
+if "%1" == "texinfo" (
+	%SPHINXBUILD% -b texinfo %ALLSPHINXOPTS% %BUILDDIR%/texinfo
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The Texinfo files are in %BUILDDIR%/texinfo.
+	goto end
+)
+
+if "%1" == "gettext" (
+	%SPHINXBUILD% -b gettext %I18NSPHINXOPTS% %BUILDDIR%/locale
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The message catalogs are in %BUILDDIR%/locale.
+	goto end
+)
+
+if "%1" == "changes" (
+	%SPHINXBUILD% -b changes %ALLSPHINXOPTS% %BUILDDIR%/changes
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.The overview file is in %BUILDDIR%/changes.
+	goto end
+)
+
+if "%1" == "linkcheck" (
+	%SPHINXBUILD% -b linkcheck %ALLSPHINXOPTS% %BUILDDIR%/linkcheck
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Link check complete; look for any errors in the above output ^
+or in %BUILDDIR%/linkcheck/output.txt.
+	goto end
+)
+
+if "%1" == "doctest" (
+	%SPHINXBUILD% -b doctest %ALLSPHINXOPTS% %BUILDDIR%/doctest
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Testing of doctests in the sources finished, look at the ^
+results in %BUILDDIR%/doctest/output.txt.
+	goto end
+)
+
+:end
+
+</document_content>
+</document>
+
+<document index="17">
+<source>docs/user/advanced.rst</source>
+<document_content>
+
+.. _standard Jinja2 filters: http://jinja.pocoo.org/docs/dev/templates/#builtin-filters
+
+Advanced Usage
+==============
+
+This document covers some of staticjinja's more advanced features.
+
+.. _partials-and-ignored-files:
+
+Partials and ignored files
+--------------------------
+
+A **partial file** is a file whose name begins with a ``_``. Partial files are
+intended to be included in other files and are not rendered. If a partial file
+changes, it will trigger a rebuild if you are running ``staticjinja watch``.
+
+An **ignored file** is a file whose name begins with a ``.``. Ignored files are
+neither rendered nor used in rendering templates.
+
+If you want to configure what is considered a partial or ignored file, subclass
+``Site`` and override ``is_partial`` or ``is_ignored``.
+
+.. _custom-build-scripts:
+
+Using Custom Build Scripts
+--------------------------
+
+The command line shortcut is convenient, but sometimes your project
+needs something different than the defaults. To change them, you can
+use a build script.
+
+A minimal build script looks something like this:
+
+.. code-block:: python
+
+    from staticjinja import Site
+
+
+    if __name__ == "__main__":
+        site = Site.make_site()
+        # enable automatic reloading
+        site.render(use_reloader=True)
+
+To change behavior, pass the appropriate keyword arguments to
+``Site.make_site``.
+
+* To change which directory to search for templates, set
+  ``searchpath="searchpath_name"`` (default is ``./templates``).
+* To change the output directory, pass in ``outpath="output_dir"``
+  (default is ``.``).
+* To add Jinja extensions, pass in ``extensions=[extension1,
+  extension2, ...]``.
+* To change which files are considered templates, subclass the
+  ``Site`` object and override ``is_template``.
+* To change where static files (such as CSS or JavaScript) are stored,
+  set ``staticpaths=["mystaticfiles/"]`` (the default is ``None``, which
+  means no files are considered to be static files). You can pass
+  multiple directories in the list: ``staticpaths=["foo/", "bar/"]``.
+  You can also specify singly files to be considered as static:
+  ``staticpaths=["favicon.ico"]``.
+
+Finally, just save the script as ``build.py`` (or something similar)
+and run it with your Python interpreter.
+
+.. code-block:: bash
+
+    $ python build.py
+    Building index.html...
+    Templates built.
+    Watching 'templates' for changes...
+    Press Ctrl+C to stop.
+
+
+Loading data
+------------
+
+Some applications render templates based on data sources (e.g. CSVs or
+JSON files).
+
+The simplest way to supply data to templates is to pass ``Site.make_site()`` a
+mapping from variable names to their values (a "context") as the ``env_globals``
+keyword argument.
+
+.. code-block:: python
+
+    if __name__ == "__main__":
+        site = Site.make_site(env_globals={
+            'greeting':'Hello world!',
+        })
+        site.render()
+
+Anything added to this dictionary will be available in all templates:
+
+.. code-block:: html
+
+    <!-- templates/index.html -->
+    <h1>{{greeting}}</h1>
+
+If the context needs to be different for each template, you can restrict
+contexts to certain templates by supplying ``Site.make_site()`` a sequence of
+regex-context pairs as the ``contexts`` keyword argument. When rendering a
+template, staticjinja will search this sequence for the first regex that matches
+the template's name, and use that context to interpolate variables. For example,
+the following code block supplies a context to the template named "index.html":
+
+.. code-block:: python
+
+    from staticjinja import Site
+
+    if __name__ == "__main__":
+        context = {'knights': ['sir arthur', 'sir lancelot', 'sir galahad']}
+        site = Site.make_site(contexts=[('index.html', context)])
+        site.render()
+
+.. code-block:: html
+
+    <!-- templates/index.html -->
+    <h1>Knights of the Round Table</h1>
+    <ul>
+    {% for knight in knights %}
+        <li>{{ knight }}</li>
+    {% endfor %}
+    </ul>
+
+If contexts needs to be generated dynamically, you can associate filenames with
+functions that return a context ("context generators"). Context generators may
+either take no arguments or the current template as its sole argument. For
+example, the following code creates a context with the last modification time of
+the template file for any templates with an HTML extension:
+
+.. code-block:: python
+
+    import datetime
+    import os
+
+    from staticjinja import Site
+
+
+    def date(template):
+        template_mtime = os.path.getmtime(template.filename)
+        date = datetime.datetime.fromtimestamp(template_mtime)
+        return {'template_date': date.strftime('%d %B %Y')}
+
+    if __name__ == "__main__":
+        site = Site.make_site(
+            contexts=[('.*.html', date)],
+        )
+        site.render()
+
+By default, staticjinja uses the context of the first matching regex if multiple
+regexes match the name of a template. You can change this so that staticjinja
+combines the contexts by passing ``mergecontexts=True`` as an argument to
+``Site.make_site()``. Note the order is still important if several matching
+regex define the same key, in which case the last regex wins. For example,
+given a build script that looks like the following code block, the context of
+the ``index.html`` template will be ``{'title': 'MySite - Index', 'date': '05
+January 2016'}``.
+
+.. code-block:: python
+
+    import datetime
+    import os
+
+    from staticjinja import Site
+
+
+    def base(template):
+        template_mtime = os.path.getmtime(template.filename)
+        date = datetime.datetime.fromtimestamp(template_mtime)
+        return {
+            'template_date': date.strftime('%d %B %Y'),
+            'title': 'MySite',
+        }
+
+
+    def index(template):
+        return {'title': 'MySite - Index'}
+
+    if __name__ == "__main__":
+        site = Site.make_site(
+            contexts=[('.*.html', base), ('index.html', index)],
+            mergecontexts=True,
+        )
+        site.render()
+
+Filters
+-------
+
+Filters modify variables. staticjinja uses Jinja2 to process templates, so all
+the `standard Jinja2 filters`_ are supported. To add your own filters, simply
+pass ``filters`` as an argument to ``Site.make_site()``.
+
+.. code-block:: python
+
+    filters = {
+        'hello_world': lambda x: 'Hello world!',
+        'my_lower': lambda x: x.lower(),
+    }
+
+    if __name__ == "__main__":
+        site = Site.make_site(filters=filters)
+        site.render()
+
+Then you can use them in your templates as you would expect:
+
+.. code-block:: html
+
+    <!-- templates/index.html -->
+    {% extends "_base.html" %}
+    {% block body %}
+    <h1>{{'' | hello_world}}</h1>
+    <p>{{'THIS IS AN EXAMPLE WEB PAGE.' | my_lower}}</p>
+    {% endblock %}
+
+Compilation rules
+-----------------
+
+Sometimes you'll find yourself needing to change how a template is
+compiled. For instance, you might want to compile files with a ``.md``
+extension as Markdown, without needing to put jinja syntax in your
+Markdown files.
+
+To do this, just write a handler by registering a regex for the files
+you want to handle, and a compilation function (a "rule").
+
+.. code-block:: python
+
+    import os
+
+    from staticjinja import Site
+
+    # Custom MarkdownExtension
+    from extensions import MarkdownExtension
+
+
+    def get_post_contents(template):
+        with open(template.filename) as f:
+            return {'post': f.read()}
+
+
+    # compilation rule
+    def render_post(env, template, **kwargs):
+        """Render a template as a post."""
+        directory, fname = os.path.split(template.name)
+        post_title, _ = fname.split(".")
+        post_fname = "%s.html" % post_title
+
+        out_dir = os.path.join(env.outpath, directory)
+        if not os.path.exists(out_dir):
+            os.makedirs(out_dir)
+        out = os.path.join(out_dir, post_fname)
+
+        post_template = env.get_template("_post.html")
+        post_template.stream(**kwargs).dump(out)
+
+
+    if __name__ == "__main__":
+        site = Site.make_site(extensions=[
+            MarkdownExtension,
+        ], contexts=[
+            ('.*.md', get_post_contents),
+        ], rules=[
+            ('.*.md', render_post),
+        ])
+        site.render(use_reloader=True)
+
+Note the rule we defined at the bottom. It tells staticjinja to check
+if the filename matches the ``.*.md`` regex, and if it does, to
+compile the file using ``render_post``.
+
+Now just implement ``templates/_post.html``...
+
+.. code-block:: html
+
+    <!-- templates/_post.html -->
+    {% extends "_base.html" %}
+    {% block content %}
+    <div class="post">
+    {% markdown %}
+    {{ post }}
+    {% endmarkdown %}
+    </div>
+    {% endblock %}
+
+This would allow you to drop Markdown files into your ``templates``
+directory and have them compiled into HTML.
+
+.. note::
+
+     You can grab MarkdownExtension from
+     http://silas.sewell.org/blog/2010/05/10/jinja2-markdown-extension/.
+
+</document_content>
+</document>
+
+<document index="18">
+<source>docs/user/quickstart.rst</source>
+<document_content>
+Quickstart
+==========
+
+Eager to get started? This page gives a good introduction for getting
+started with staticjinja.
+
+Installation
+------------
+
+staticjinja supports Python 2.6, 2.7, 3.3 and 3.4.
+
+Installing staticjinja is simple with `pip
+<http://www.pip-installer.org/>`_::
+
+    $ pip install staticjinja
+
+Rendering templates
+-------------------
+
+If you're just looking to render simple data-less templates, you can
+get up and running with the following shortcut:
+
+.. code-block:: bash
+
+   $ staticjinja build
+    Rendering index.html...
+
+This will recursively search ``./templates`` for templates (any file
+whose name does not start with ``.`` or ``_``) and build them to
+``.``.
+
+To monitor your source directory for changes, and recompile files if
+they change, use ``watch``:
+
+.. code-block:: bash
+
+   $ staticjinja watch
+    Rendering index.html...
+    Watching 'templates' for changes...
+    Press Ctrl+C to stop.
+
+Configuration
+-------------
+
+``build`` and ``watch`` each take 3 options:
+
+* ``--srcpath`` - the directory to look in for templates (defaults to
+  ``./templates``);
+* ``--outpath`` - the directory to place rendered files in (defaults
+  to ``.``);
+* ``--static`` - the directory (or directories) within ``srcpath``
+  where static files   (such as CSS and JavaScript) are stored. Static
+  files are copied to the output directory without any template
+  compilation, maintaining any directory structure. This defaults to
+  ``None``, meaning no files are considered to be static files. You
+  can pass multiple directories separating them by commas:
+  ``--static="foo,bar/baz,lorem"``.
+
+More advanced configuration can be done using the staticjinja API, see
+:ref:`custom-build-scripts` for details.
+
+</document_content>
+</document>
+
+# File: /Users/adam/Developer/vcs/github.twardoch/pub/staticjinja/example/build.py
+# Language: python
+
+import staticjinja
+
+
+<document index="19">
+<source>example/templates/_base.html</source>
+<document_content>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My Site</title>
+        {% block css %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+        {% endblock %}
+        {% block js %}
+        {% endblock %}
+    </body>
+</html>
+
+</document_content>
+</document>
+
+<document index="20">
+<source>example/templates/index.html</source>
+<document_content>
+{% extends "_base.html" %}
+{% block body %}
+<h1>Hello world!</h1>
+<p>This is an example web page.</p>
+{% endblock %}
+
+</document_content>
+</document>
+
+<document index="21">
+<source>example/templates/posts/foo.html</source>
+<document_content>
+<h1>Hello</h1>
+
+</document_content>
+</document>
+
+<document index="22">
+<source>requirements.txt</source>
+<document_content>
+Jinja2>=2.6
+PyYAML>=3.10
+argh>=0.21.0
+argparse>=1.2.1
+docopt>=0.6.1
+easywatch>=0.0.5
+pathtools>=0.1.2
+watchdog>=0.6.0
+wsgiref>=0.1.2; python_version < '2.5'
+
+</document_content>
+</document>
+
+<document index="23">
+<source>setup.cfg</source>
+<document_content>
+[wheel]
+universal = 1
+
+[pytest]
+addopts = --doctest-modules --ignore setup.py
+norecursedirs = env
+
+[metadata]
+license-file = LICENSE
+
+</document_content>
+</document>
+
+# File: /Users/adam/Developer/vcs/github.twardoch/pub/staticjinja/setup.py
+# Language: python
+
+from setuptools import setup
+
+
+# File: /Users/adam/Developer/vcs/github.twardoch/pub/staticjinja/staticjinja/__init__.py
+# Language: python
+
+from .reloader import Reloader
+from .staticjinja import Site, make_site
+
+
+# File: /Users/adam/Developer/vcs/github.twardoch/pub/staticjinja/staticjinja/__main__.py
+# Language: python
+
+import os
+import staticjinja
+
+
+# File: /Users/adam/Developer/vcs/github.twardoch/pub/staticjinja/staticjinja/cli.py
+# Language: python
+
+import os
+import sys
+from docopt import docopt
+import staticjinja
+
+def render((args)):
+    """ Render a site...."""
+
+def main(()):
+
+
+# File: /Users/adam/Developer/vcs/github.twardoch/pub/staticjinja/staticjinja/reloader.py
+# Language: python
+
+import os
+import easywatch
+
+class Reloader:
+    """ Watches ``site.searchpath`` for changes and re-renders any changed..."""
+    def __init__((self, site)):
+    def should_handle((self, event_type, filename)):
+        """Check if an event should be handled."""
+    def event_handler((self, event_type, src_path)):
+        """Re-render templates if they are modified."""
+    def watch((self)):
+        """Watch and reload modified templates."""
+
+def __init__((self, site)):
+
+def searchpath((self)):
+
+def should_handle((self, event_type, filename)):
+    """Check if an event should be handled."""
+
+def event_handler((self, event_type, src_path)):
+    """Re-render templates if they are modified."""
+
+def watch((self)):
+    """Watch and reload modified templates."""
+
+
+# File: /Users/adam/Developer/vcs/github.twardoch/pub/staticjinja/staticjinja/staticjinja.py
+# Language: python
+
+import inspect
+import logging
+import os
+import re
+import shutil
+import warnings
+from fnmatch import fnmatch
+from jinja2 import Environment, FileSystemLoader
+from .reloader import Reloader
+
+class Site:
+    """The Site object. ..."""
+    def __init__((
+        self,
+        environment,
+        searchpath,
+        outpath,
+        encoding,
+        logger,
+        contexts=None,
+        rules=None,
+        staticpaths=None,
+        mergecontexts=False,
+        searchmask=None,
+    )):
+    def get_template((self, template_name)):
+        """Get a :class:`jinja2.Template` from the environment."""
+    def get_context((self, template)):
+        """Get the context for a template."""
+    def get_rule((self, template_name)):
+        """Find a matching compilation rule for a function."""
+    def is_static((self, filename)):
+        """Check if a file is a static file (which should be copied, rather"""
+    def is_partial((self, filename)):
+        """Check if a file is a partial."""
+    def is_ignored((self, filename)):
+        """Check if a file is an ignored file."""
+    def is_template((self, filename)):
+        """Check if a file is a template."""
+    def _ensure_dir((self, template_name)):
+        """Ensure the output directory for a template exists."""
+    def render_template((self, template, context=None, filepath=None)):
+        """Render a single :class:`jinja2.Template` object."""
+    def render_templates((self, templates, filepath=None)):
+        """Render a collection of :class:`jinja2.Template` objects."""
+    def copy_static((self, files)):
+    def get_dependencies((self, filename)):
+        """Get a list of files that depends on the file named *filename*."""
+    def render((self, use_reloader=False)):
+        """Generate the site. ..."""
+    def __repr__((self)):
+
+class Renderer(S, i, t, e):
+    def __init__((self, *args, **kwargs)):
+    def run((self, use_reloader=False)):
+
+def _has_argument((func)):
+    """Test whether a function expects an argument."""
+
+def __init__((
+        self,
+        environment,
+        searchpath,
+        outpath,
+        encoding,
+        logger,
+        contexts=None,
+        rules=None,
+        staticpaths=None,
+        mergecontexts=False,
+        searchmask=None,
+    )):
+
+def make_site((
+        cls,
+        searchpath="templates",
+        outpath=".",
+        contexts=None,
+        rules=None,
+        encoding="utf8",
+        followlinks=True,
+        extensions=None,
+        staticpaths=None,
+        filters=None,
+        env_globals=None,
+        env_kwargs=None,
+        mergecontexts=False,
+        searchmask=None,
+    )):
+    """Create a :class:`Site <Site>` object."""
+
+def template_names((self)):
+
+def templates((self)):
+    """Generator for templates."""
+
+def static_names((self)):
+
+def get_template((self, template_name)):
+    """Get a :class:`jinja2.Template` from the environment."""
+
+def get_context((self, template)):
+    """Get the context for a template."""
+
+def get_rule((self, template_name)):
+    """Find a matching compilation rule for a function."""
+
+def is_static((self, filename)):
+    """Check if a file is a static file (which should be copied, rather"""
+
+def is_partial((self, filename)):
+    """Check if a file is a partial."""
+
+def is_ignored((self, filename)):
+    """Check if a file is an ignored file."""
+
+def is_template((self, filename)):
+    """Check if a file is a template."""
+
+def _ensure_dir((self, template_name)):
+    """Ensure the output directory for a template exists."""
+
+def render_template((self, template, context=None, filepath=None)):
+    """Render a single :class:`jinja2.Template` object."""
+
+def render_templates((self, templates, filepath=None)):
+    """Render a collection of :class:`jinja2.Template` objects."""
+
+def copy_static((self, files)):
+
+def get_dependencies((self, filename)):
+    """Get a list of files that depends on the file named *filename*."""
+
+def render((self, use_reloader=False)):
+    """Generate the site. ..."""
+
+def __repr__((self)):
+
+def __init__((self, *args, **kwargs)):
+
+def run((self, use_reloader=False)):
+
+def make_site((
+    searchpath="templates",
+    outpath=".",
+    contexts=None,
+    rules=None,
+    encoding="utf8",
+    followlinks=True,
+    extensions=None,
+    staticpaths=None,
+    filters=None,
+    env_globals=None,
+    env_kwargs=None,
+    mergecontexts=False,
+    searchmask=None,
+)):
+
+def make_renderer((*args, **kwargs)):
+
+
+# File: /Users/adam/Developer/vcs/github.twardoch/pub/staticjinja/test_staticjinja.py
+# Language: python
+
+import unittest.mock as mock
+from unittest import mock
+from pytest import fixture, raises
+from staticjinja import Reloader, cli, make_site
+
+def filename(()):
+
+def template_path((tmpdir)):
+
+def build_path((tmpdir)):
+
+def site((template_path, build_path)):
+
+def reloader((site)):
+
+def test_template_names((site)):
+
+def test_templates((site)):
+
+def test_get_context((site)):
+
+def test_get_rule((site)):
+
+def test_get_dependencies((site, filename)):
+
+def test_render_template((site, build_path)):
+
+def test_render_nested_template((site, build_path)):
+
+def test_render_template_with_env_globals((template_path, build_path)):
+    """Ensure variables defined in env_globals can be accessed globally."""
+
+def test_render_templates((site, build_path)):
+
+def test_build((site)):
+
+def fake_site((template, context=None, filepath=None)):
+
+def test_with_reloader((reloader, site)):
+
+def watch((self)):
+
+def test_should_handle((reloader, template_path)):
+
+def test_event_handler((reloader, template_path)):
+
+def fake_site((template, context=None, filepath=None)):
+
+def test_event_handler_static((reloader, template_path)):
+
+def fake_copy_static((files)):
+
+def test_ignored_file_is_ignored((site)):
+
+def test_regular_file_is_not_ignored((site)):
+
+def test_ignored_file_in_directory_is_ignored((site)):
+
+def test_ignored_file_in_nested_directory_is_ignored((site)):
+
+def test_partial_file_is_partial((site)):
+
+def test_regular_file_is_not_partial((site)):
+
+def test_partial_file_in_directory_is_partial((site)):
+
+def test_partial_file_in_nested_directory_is_partial((site)):
+
+def test_cli_srcpath((mock_make_site, mock_getcwd, mock_isdir)):
+
+def test_cli_srcpath_default((mock_make_site, mock_getcwd, mock_isdir)):
+
+def test_cli_srcpath_absolute((mock_make_site, mock_getcwd, mock_isdir)):
+
+
+<document index="24">
+<source>tox.ini</source>
+<document_content>
+[tox]
+envlist = py27,py33,py34,docs,flake8
+
+[testenv]
+commands=py.test test_staticjinja.py
+deps =
+    mock
+    pytest
+
+[testenv:docs]
+changedir=docs
+deps=sphinx
+commands=
+    sphinx-build -W -b html -d {envtmpdir}/doctrees .  {envtmpdir}/html
+
+[testenv:flake8]
+basepython=python
+deps=flake8==2.1.0
+commands=
+    flake8 staticjinja
+    flake8 setup.py
+    flake8 test_staticjinja.py
+
+</document_content>
+</document>
+
+</documents>
